@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tao Jiang</title>
+        <meta name="description" content="Tao JIANG is a scholar of classical Chinese philosophy, Mahāyāna Buddhist philosophy, and comparative philosophy at Rutgers University. Jiang's approach to philosophy is to treat it as a way to study a particular form of intellectual life and the people who conceive of it." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes, maximum-scale=1.0, viewport-fit=cover">
+        <meta name="theme-color" content="#000000">
+        <meta name="google-site-verification" content="b7gjzu-sOnIp1kl28IohXJFCeQX1Rhf3m3vjM2tFHNc" />
+        <!--
+        manifest.json provides metadata used when your web app is added to the
+        homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+        -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+        <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+        <!--
+        Notice the use of %PUBLIC_URL% in the tags above.
+        It will be replaced with the URL of the `public` folder during the build.
+        Only files inside the `public` folder can be referenced from the HTML.
+
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+        work correctly both with client-side routing and a non-root public URL.
+        Learn how to configure a non-root public URL by running `npm run build`.
+        -->
+        
+        <script type="text/javascript">
+            // Single Page Apps for GitHub Pages
+            // https://github.com/rafrex/spa-github-pages
+            // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
+            // ----------------------------------------------------------------------
+            // This script checks to see if a redirect is present in the query string
+            // and converts it back into the correct url and adds it to the
+            // browser's history using window.history.replaceState(...),
+            // which won't cause the browser to attempt to load the new url.
+            // When the single page app is loaded further down in this file,
+            // the correct url will be waiting in the browser's history for
+            // the single page app to route accordingly.
+            (function(l) {
+            if (l.search) {
+                var q = {};
+                l.search.slice(1).split('&').forEach(function(v) {
+                    var a = v.split('=');
+                    q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
+                });
+                if (q.p !== undefined) {
+                    window.history.replaceState(null, null,
+                    l.pathname.slice(0, -1) + (q.p || '') +
+                    (q.q ? ('?' + q.q) : '') +
+                    l.hash
+                    );
+                }
+                }
+            }(window.location))
+        </script>
+    </head>
+    <!-- <canvas aria-hidden = "true"></canvas> -->
+    <body>
+        <div id="root"></div>
+    </body>
+    <script type="text/javascript" src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
+    <script type="text/javascript">
+        addBackToTop({
+            id: 'back-to-top',
+            diameter: 56,
+            cornerOffset: 20,
+            backgroundColor: 'rgba(255,255,255,0.3)',
+            innerHTML: '<svg viewBox="0 0 24 24"><path d="M4 12l1.41 1.41L11 7.83V20h2V7.83l5.58 5.59L20 12l-8-8-8 8z"/></svg>',
+            textColor: 'rgb(236, 133, 19)'
+        })
+    </script>
+    <!-- <script>
+        // The canvas animation is modified based on a rewriten code which is originated from Evan You's blog.
+        // https://github.com/zproo/canvas-ribbon
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault()
+        });
+        var canvasRibbon = document.getElementsByTagName('canvas')[0],
+            ctx = canvasRibbon.getContext('2d'),
+            dpr = window.devicePixelRatio || 1,
+            width = window.innerWidth,
+            height = window.innerHeight,
+            RIBBON_WIDE = 90,
+            path,
+            math = Math,
+            r = 0,
+            PI_2 = math.PI * 2,
+            cos = math.cos,
+            random = math.random;
+        ctx.clearRect(0, 0, width, height);
+        canvasRibbon.width = width * dpr;
+        canvasRibbon.height = height * dpr;
+        ctx.scale(dpr, dpr);
+        ctx.globalAlpha = 0.2;
+
+        // var colors = [
+        //     // '#2f53fd',
+        //     // '#2362f9',
+        //     // '#1972f4',
+        //     // '#1082ec'
+        //     // '#10ec82',
+        //     // '#19f472',
+        //     // '#23f962',
+        //     // '#2ffd53',
+        //     // '#3bfe45',
+        //     // '#49fe37',
+        //     // '#58fc2b',
+        //     // '#68f71f',
+        //     // '#78f116'
+        //     // '#87e90e',
+        //     // '#97e008',
+        //     // '#19f472',
+        //     // '#23f962',
+        //     // '#2ffd53',
+        //     // '#3bfe45',
+        //     // '#49fe37',
+        //     // '#58fc2b',
+        //     // '#68f71f',
+        //     // '#78f116',
+        //     // '#87e90e',
+        //     // '#97e008',
+        //     // '#a7d403',
+        //     // '#b6c801'
+        // ]
+        var color = '#1082ec';
+
+        function init() {
+            ctx.clearRect(0, 0, width, height);
+            // RIBBON_WIDE = window.innerWidth <= 500 ? 90 : 161;
+            path = [{x: 0, y: height * 0.7 + RIBBON_WIDE}, {x: 0, y: height * 0.7 - RIBBON_WIDE}];
+            let status = checkStatus();
+            function checkStatus() {
+                // Prevent canvas rendering in homepage.
+                // return window.location.pathname !== '/' && path[1].x < width + RIBBON_WIDE;
+                return path[1].x < width + RIBBON_WIDE;
+            }
+            function nextFrame() {
+                if (status) {
+                    draw(path[0], path[1]);
+                    status = checkStatus();
+                    setTimeout(nextFrame, 500/width * 100);
+                }
+            }
+            setTimeout(nextFrame, 0);
+        }
+
+        function draw(start, end) {
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.lineTo(end.x, end.y);
+            var nextX = end.x + (random() * 2 - 0.25) * RIBBON_WIDE,
+                nextY = geneY(end.y);
+            ctx.lineTo(nextX, nextY);
+            ctx.closePath();
+            r -= PI_2 / -50;
+            // ctx.fillStyle = '#' + ((cos(r) * 127 + 128 << 16) | (cos(r + PI_2 / 3) * 127 + 128 << 8) | (cos(r + PI_2 / 3 * 2) * 127 + 128)).toString(16);
+            ctx.fillStyle = color;
+            ctx.fill();
+            path[0] = path[1];
+            path[1] = {x: nextX, y: nextY};
+        }
+
+        function geneY(y) {
+            var temp = y + (random() * 2 - 1.1) * RIBBON_WIDE;
+            return (temp > height || temp < 0) ? geneY(y) : temp
+        }
+
+        document.onclick = function(e) {if (e.target.classList.contains("nav-link")) {init()}};
+        window.onresize = init;
+        window.addEventListener("orientationchange", init);
+        init();
+    </script> -->
+</html>

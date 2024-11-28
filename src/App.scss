@@ -1,0 +1,1018 @@
+$font-path: './fonts/';
+@import './fonts/medium-content-sans-serif-font';
+@import './fonts/medium-content-serif-font';
+
+$themeColor: rgb(236, 133, 19);
+$selectionColor: rgba(236, 133, 19, 0.15);
+$background-color: #f5f5f5;
+$navLinkColor: rgba(0,0,0,0.45);
+$link-separator-color: rgba(0,0,0,0.1);
+// $border-color: #dddddd;
+$border-color: rgba(0,0,0,0.1);
+$main-text-color : rgba(0,0,0,.84);
+$active-link-color: #000000;
+$button-color: #272727;
+//$header-title-font: 'Nanum Brush Script', cursive;
+$nav-link-font: 'SF Pro Text Light';
+$main-title-font: 'medium-content-sans-serif-font';
+$main-text-font: 'medium-content-serif-font';
+$button-font: 'SF Pro Text Regular';
+$html-background-color: rgb(245, 247, 249);
+
+// customized Burger icon settings should be done first. More details: https://github.com/jonsuh/hamburgers
+$hamburger-padding-x           : 16px;
+$hamburger-padding-y           : 16px;
+$hamburger-layer-width         : 30px;
+$hamburger-layer-height        : 1px;
+$hamburger-layer-spacing       : 6px;
+$hamburger-layer-color         : $themeColor;
+$hamburger-layer-border-radius : 0px;
+$hamburger-hover-opacity       : 1;
+$hamburger-active-layer-color  : $main-text-color;
+$hamburger-active-hover-opacity: $hamburger-hover-opacity;
+@import './hamburgers/hamburgers.scss';
+
+@font-face {
+    font-family: 'SF Pro Text Light';
+    src: url($font-path + 'SF-Pro-Text-Light.otf');
+}
+
+@font-face {
+    font-family: 'SF Pro Text Regular';
+    src: url($font-path + 'SF-Pro-Text-Regular.otf');
+}
+
+@mixin limitWidth {
+    max-width: 1110px;
+    padding: 0 3%;
+    margin: 0 auto;
+
+    // @media only screen and (max-width: 500px) {
+    //     // For iPhone X and newer models: https://github.com/webpack-contrib/sass-loader/issues/528#issuecomment-362259216
+    //     @supports(padding: max(0px)) {
+    //         & {
+    //             margin-left: m#{a}x(12px, env(safe-area-inset-left));
+    //             margin-left: m#{a}x(12px, env(safe-area-inset-right));
+    //             // padding-left: max(12px, env(safe-area-inset-left));
+    //             // padding-right: max(12px, env(safe-area-inset-right));
+    //         }
+    //     }
+    // }
+
+    // @media only screen and (min-width: 1200px) {
+    //     padding-top: 1em;
+    // }
+
+    // Prevent text overflow its parent container: https://stackoverflow.com/questions/5241369/word-wrap-a-link-so-it-doesnt-overflow-its-parent-div-width
+    // white-space: pre-wrap; /* css-3 */    
+    // white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    // white-space: -pre-wrap; /* Opera 4-6 */    
+    // white-space: -o-pre-wrap; /* Opera 7 */    
+    // word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+@mixin justifyText {
+    line-height: 1.58;
+    letter-spacing: -0.003em;
+    // text-align: justify;
+    // word-break: keep-all;
+}
+
+@mixin sticky {
+    position: sticky;
+    top: 0;
+}
+
+@mixin buttonStyle {
+    text-align: center;
+    border: $button-color solid 1px;
+    cursor: pointer;
+    color: $button-color;
+    // background: white;
+    font-family: $button-font;
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+}
+
+@mixin blockSeperator {
+    content: ""; // This is necessary for the pseudo element to work.
+    display: block; // This will put the pseudo element on its own line. 
+    padding-top: 2em;
+    margin: 0 auto 1em auto; // Center the border
+    width: 50%;
+    border-bottom: 1px solid $link-separator-color;
+}
+
+@mixin buttonHoverStyle {
+    background: $button-color;
+    color: white;
+}
+
+// Add padding to paragraph on mobile device
+@mixin addPaddingToParagraphOnMobileDevice {
+    p {
+        @media only screen and (max-width: 500px){
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+// @mixin clearfix {
+//     content: "";
+//     clear: both;
+//     display: table;
+// }
+
+// @media only screen and (max-width: 500px) {
+//     p {
+//         text-align: left;
+//         word-break: normal;
+//     }
+// }
+
+// @media only screen and (min-width: 501px) {
+//     p {
+//         text-align: justify;
+//         word-break: keep-all;
+//     }
+// }
+
+html {
+    /* Prevent font scaling in landscape while allowing user zoom */
+    -webkit-text-size-adjust: 100%;
+    // Remove Gray Highlight When Tapping Links in Mobile Safari: https://css-tricks.com/snippets/css/remove-gray-highlight-when-tapping-links-in-mobile-safari/
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+    // Reduce font rendering difference across browsers
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+    // To cover the whole screen on iPhone X and newer models on landscape mode.
+    // padding: env(safe-area-inset);
+
+    background-color: $html-background-color;
+
+    * ::selection {
+        //background: $link-separator-color !important;
+        background: $selectionColor !important;
+    }
+
+    img::selection {
+        background: none;
+    }
+    
+    a {
+        color: $themeColor;
+        text-decoration: none;
+
+        &:hover {
+            // color: rgb(0, 216, 208);
+            text-decoration: underline;
+        }
+    }
+
+    button {
+        background: none;
+
+        &:active, &:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    // For canvas animation
+    // canvas {
+    //     position: fixed;
+    //     z-index: -1;
+    //     padding: 0;
+    //     margin: 0;
+    //     top: -30%;
+    //     left: 0; // For iPhone X to show ribbon from the very left even under the notch.
+    //     height: 100%;
+    //     width: 100%;
+
+    //     // @media only screen and (max-width: 780px) {
+    //     //     padding-bottom: 21%;
+    //     // }
+    // }
+
+    // #main-header, main {
+    //     background-color: rgba(255, 255, 255, 0.95);
+    // } 
+    main {
+        background-color: rgba(255, 255, 255, 0.95);
+    } 
+}
+
+body {
+    // For iPhone X and newer models.
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+
+    // max-width: 1200px;
+    // margin: 0 auto;
+    font-family: $main-text-font;
+    color: $main-text-color;
+    background: none;
+
+    h2 {
+        font-family: $nav-link-font;
+        font-size: 26px;
+        font-weight: 500;
+        line-height: 40px;
+        font-style: normal;
+        border-bottom: $link-separator-color 1px solid;
+
+        @media only screen and (min-width: 501px) {
+            padding-top: 10px;
+        }
+    }
+
+    #app {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 100vh;
+
+        main#background-image, div#maincontent-container{
+            flex: 1;
+            box-sizing: border-box;
+            width: 100%;
+            padding-bottom: 2em;
+            // max-width: 100vw;
+            // background: white;
+        }
+    }
+
+    div#maincontent-container {
+        background: white;
+    }
+
+    p {
+        // WCAG 2.1
+        // max-width: 80ch !important;
+        max-width: 70em !important;
+        word-break: keep-all;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+// Burger icon
+#burger {
+    // Position value is set to be fixed in App.js when sidebar is open.
+    position: absolute;
+    left: 0;
+    top: 20px;
+    z-index: 3;
+}
+
+// Sidebar
+#sidebar {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: $nav-link-font;
+    letter-spacing: 1px;
+    // border-bottom: $border-color solid 1px;
+
+
+    a {
+        color: $main-text-color;
+    }
+
+    a.active {
+        color: $main-text-color !important;
+        text-decoration: underline;
+    }
+
+    width: 100%;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+
+    background-color: $themeColor;
+    //background-image: linear-gradient(25deg, rgb(176, 148, 93) 0%, $themeColor 100%);
+    overflow-x: hidden;
+    transition: 0.3s;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        
+        li {
+            margin: 2em 0;
+        }
+    }
+
+    // Push footer to the bottom
+    display: flex;
+    flex-direction: column;
+    & ul.nav {
+        flex: 1;
+    }
+
+    .footer {
+        // position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        // border-top: $border-color solid 1px;
+
+        #developer {
+            color: $navLinkColor;
+        }
+
+        &:hover {
+            #developer {
+                color: $main-text-color;
+            }
+        }
+    }
+}
+
+// Header
+header {
+    text-align: center;
+    color: $navLinkColor;
+    // border-bottom: $border-color solid 1px;
+    padding: 40px 0 30px 0;
+
+    @media only screen and (max-width: 500px) {
+        padding: 25px 0 15px 0;
+    }
+
+    img {
+        height: 40px;
+    }
+
+    ul.nav {
+        display: block;
+        margin: 0 0 10px 0;
+        padding: 0 5px;
+        font-family: $nav-link-font;
+        font-size: 14px;
+        font-weight: 600;
+
+        .link-separator {
+        padding: 0 7px;
+        color: $link-separator-color;
+        }
+    }
+
+    .nav-item {
+        list-style: none;
+        display: inline-block;
+        line-height: 1.8em;
+
+        .nav-link {
+        color: $navLinkColor;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        white-space: nowrap;
+        
+        &:hover {
+            color: $main-text-color;
+        }
+        }
+
+        .active {
+            // color: $active-link-color;
+            color: $themeColor;
+            &:hover {
+                color: $themeColor;
+            }
+        }
+    }
+}
+
+// Book
+.book {
+    @include limitWidth;
+    @include addPaddingToParagraphOnMobileDevice;
+
+    // The following two sets of media querries are modified based on the following querries which are commented out.
+    // @media only screen and (max-width: 500px) {
+    //     // Make the book cover smaller
+    //     .book-pic-container {
+    //         padding: 0 20%;
+    //     }
+
+    //     margin: 0 !important;
+    // }
+
+    // @media only screen and (min-width: 501px) { 
+    //     .book-pic-container {
+    //         width: 26.5%;
+    //         min-width: 190px;
+    //         margin: 0.5em 1em 0 0 !important;
+    //         float: left;
+
+    //         .gap {
+    //             padding-right: 1em;
+    //         }
+    //     }
+
+    //     .book-introduction {
+    //         display: inline;
+    //     }
+    // }
+
+    @media only screen and (max-width: 500px) {
+        margin: 0 !important;
+
+        // Make the book cover smaller
+        .book-pic-container {
+            padding: 0 20%;
+        }
+    }
+
+    @media only screen and (min-width: 501px) and (max-width: 850px) { 
+        .book-pic-container {
+            width: 35%;
+            margin: 0.5em 1em 0 0 !important;
+            float: left;
+
+            .gap {
+                padding-right: 1em;
+            }
+        }
+
+        .book-introduction {
+            display: inline;
+        }
+    }
+    
+    @media only screen and (min-width: 851px) { 
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-column-gap: 2em;
+        }
+
+        h2.bookname {
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+
+        .book-pic-container {
+            max-height: 500px;
+            @include sticky;
+            top: 2em;
+            grid-column-start: 1;
+            grid-column-end: 2;
+
+            .gap {
+                padding-right: 1em;
+            }
+
+            .book-link {
+                width: 100%;
+                box-sizing: border-box;
+                margin-right: 2em;
+            }
+        }
+
+        .book-introduction {
+            grid-column-start: 2;
+            grid-column-end: 5;
+        }
+    
+        .book-review {
+            grid-column-start: 2;
+            grid-column-end: 5;
+        }
+    }
+
+    .book-pic-container {
+        margin: 1.5em 0 0 0;
+        text-align: center;
+        min-width: 190px;
+        
+        .book-img{
+            display: block;
+            max-width: 100%;
+            margin: 0; 
+        }
+
+        .book-link {
+            display: block;
+            text-decoration: none;
+            padding: 1em;
+            margin: 0.5em 0;
+            @include buttonStyle;
+
+            &:hover {
+                @include buttonHoverStyle;
+            }
+        }
+    }
+
+    .book-text {
+        font-size: 18px;
+        @include justifyText;
+    }
+
+    //p:first-of-type {
+    //    &::first-letter {
+    //        initial-letter: 2;
+    //    }
+    //}
+
+    .book-review {
+        margin-top: 1em;
+    }
+
+    .more-book-review {
+        list-style: none;
+        padding: 0;
+    }
+
+    .hidden {
+        visibility: hidden;
+        height: 0;
+        
+        & > * {
+            visibility: hidden;
+            height: 0;
+        }
+    }
+
+    .publisher {
+        font-family: $nav-link-font;
+        font-size: 13px;
+        text-align: center;
+        color: $main-text-color;
+        margin-top: 0;
+        padding: 0.5em;
+        background: $background-color;
+    }
+
+    .review-button-container {
+        text-align: center;
+
+        .review-button {
+            width: 24%;
+            min-width: 165px;
+            margin: 3em 2em;
+            padding: 1em 2em;
+            @include buttonStyle;
+    
+            &:hover {
+                @include buttonHoverStyle;
+            }
+        }
+    }
+
+    li.review-item {
+        padding: 0.3em 0 0 0;
+
+        .commentor {
+            // text-align: right;
+            // float: right;
+            font-family: $nav-link-font;
+            font-size: 120%;
+            //padding-bottom: 1em;
+            // margin-bottom: 1.5em;
+        }
+
+        // &::after {
+        //     @include clearfix;
+        //     border-bottom: $link-separator-color solid 1px;
+        // }
+    }
+
+    li.review-item:not(:last-of-type)::after {
+        @include blockSeperator;
+    }
+
+    .magazine {
+        font-style: italic;
+    }
+
+}
+
+// Home
+#background-image {
+    // Image url is specified in Home component
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    // Make the image fixed in the container
+    background-attachment: local;
+    min-height: 300px;
+    // iMac 5K
+    max-width: 5120px;
+}
+
+// Papers
+#papers-div {
+    @include limitWidth;
+    color: $main-text-color;
+    font-size: 18px;
+
+    @media only screen and (min-width: 780px) {
+        & {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-column-gap: 2em;
+        }
+
+        div.options {
+            grid-column-start: 5;
+            grid-column-end: 6;
+        }
+
+        div.papers {
+            grid-column-start: 1;
+            grid-column-end: 5;
+            grid-row-start: 1;
+        }
+
+        div.sticky {
+            @include sticky;
+        }
+    }
+
+    @media only screen and (max-width: 779px) {
+        div.options {
+            @include sticky;
+            margin-top: 1em;
+            text-align: center !important;
+            background: white;
+            
+
+            h2 {
+                visibility: hidden;
+                height: 0;
+                margin: 0;
+            }
+        }
+
+        div.label {
+            width: auto !important;
+            padding: 0.5em 0.5em !important;
+        }
+
+        p {
+            text-align: left;
+            word-break: normal;
+        }
+    }
+
+    div.options {
+        text-align: center;
+        width: 100%;
+    }
+
+    div.tag-label-container {
+        display: inline-block;
+        text-align: center;
+
+        &:not(:last-child) {
+            margin-right: 2px;
+        }
+
+        div.label {
+            width: 180px;
+            border: none;
+            font-family: $button-font;
+            font-size: 14px;
+            color: white;
+            padding: 0.5em 0;
+            margin: 0.5em 0;
+        }
+    }
+
+    ul {
+        padding: 0 20px;
+        @include justifyText;
+
+        li {
+            p {
+                margin: 0 0 0 0.5em;
+                text-indent: -0.4em;
+            }
+
+            a.paper-title {
+                color: $main-text-color;
+                text-decoration: none;
+
+                &:hover {
+                    color: $themeColor;
+                }
+            }
+
+            div.indent {
+                margin: 0.2em 0 2em 0.5em;
+            }
+
+            span.tag-container {
+                margin: 0 0 0 5px;
+            }
+
+            span.tag {
+                display: inline-block;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                margin-right: 5px;
+            }
+
+            .download-icon {
+                height: 20px;
+            }
+        }
+    }
+}
+
+// About
+.about {
+    @include limitWidth;
+    @include addPaddingToParagraphOnMobileDevice;
+    font-size: 18px;
+    
+    p {
+        margin-left: 0;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .pic-container {
+            text-align: center;
+        }
+        .info-pic {
+            float: none !important;
+            margin: 0 !important;
+            width: 50%;
+            height: auto !important;
+        }
+    }
+    @media only screen and (min-width: 800px) {
+        & {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: auto;
+            grid-column-gap: 3em;
+        }
+    
+        .info {
+            grid-column-start: 1;
+            grid-column-end: 4;
+        }
+    }
+    @media only screen and (max-width: 799px) {
+        address *{
+            text-align: center;
+        }
+    }
+
+    .info-pic {
+        height: 175px;
+        float: left;
+        margin: 6px 1.5em 0.8em 0;
+    }
+
+    p {
+        @include justifyText;
+
+        #lastname {
+            font-size: 85%;
+        }
+
+        .italic {
+            font-style: italic;
+        }
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .contact {
+        list-style: none;
+        padding: 0;
+        font-family: $button-font;
+
+        address {
+            font-style: normal;
+            margin-bottom: 2em;
+            position: sticky;
+            top: 1em;
+        }
+    }
+}
+
+// Events
+#events {
+    @include limitWidth;
+
+    // Temporarily override the WCAG 80 characters limitation
+    // p {
+    //     max-width: 100%;
+    // }
+
+    h3 {
+        font-family: $nav-link-font;
+        font-size: 22px;
+        font-weight: 100;
+    }
+
+    p {
+        line-height: 1.58;
+        font-size: 18px;
+    }
+
+    p.location {
+        font-family: $button-font;
+        font-size: 15px;
+    }
+
+    div.event-detail {
+        margin-left: 3px;
+        padding: 0 1em;
+        box-sizing: border-box;
+    }
+
+    div.event-container:not(:last-of-type)::after {
+        @include blockSeperator;
+        margin-bottom: 3em;
+        // padding-top: 0;
+    }
+
+    @media only screen and (min-width: 481px) {
+
+        div.event-container {
+            margin: 2em 0;
+        }
+
+        p.location {
+            text-align: right;
+            margin: -1em 0 -0.5em 0;
+        }
+    }
+
+    img.location-icon {
+        height: 18px;
+        margin-right: 5px;
+        // Make the icon vertically align with the text
+        padding-bottom: 3px;
+        vertical-align: middle;
+    }
+
+    button.video-button {
+        width: 20%;
+        margin-top: 1em;
+        min-width: 145px;
+        padding: 1em 2em;
+        @include buttonStyle;
+        
+        &:hover {
+            @include buttonHoverStyle;
+        }
+    }
+
+    // Styles in div.video-container and iframe are derived from 'https://www.h3xed.com/web-development/how-to-make-a-responsive-100-width-youtube-iframe-embed'
+    // to make the embeded Youtube video responsive.
+    div.video-container {
+        position: relative;
+        width: 100%;
+        height: 0;
+        // padding-bottom controls the height of the video, the video is hidden if its value is 0, 
+        padding-bottom: 44%;
+    }
+
+    // Local Video
+    video {
+        width: 100%;
+        max-height: 400px;
+        max-width: 650px;
+    }
+
+    // Youtube Video
+    iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.pdf-container {
+    @include limitWidth;
+    background: white;
+
+    li {
+        color: $navLinkColor;
+        margin: 1em 0;
+    }
+
+    div#switch-container {
+        button#toggle-switch{
+            @include buttonStyle;
+            background: white;
+            width: 150px;
+            min-height: 35px;
+            margin: 0 0 1em 0;
+
+            @media only screen and (min-width: 900px) {
+                &:hover {
+                    @include buttonHoverStyle;
+                }
+            }
+        }
+    }
+
+    #pdf-remainder {
+        padding: 0.5em 1em;
+        // background-color: rgba($background-color, .7);
+        background-color: $background-color;
+
+        p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+    }
+
+    .pdf-canvas {
+        min-height: 600px;
+
+        // Align PDF canvas and text layer
+        canvas.react-pdf__Page__canvas {
+            margin: 0 auto;
+        }
+    }
+}
+
+#back-to-top {
+    margin-bottom: env(safe-area-inset-bottom) !important;
+}
+
+blockquote {
+    text-indent: -0.45em;
+}
+
+// If there's support, erase the indent and use the property instead
+@supports ( hanging-punctuation: first) {
+    blockquote {
+        text-indent: 0;
+        hanging-punctuation: first;
+    }
+}
+
+.footer {
+    font-family: $nav-link-font;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: $navLinkColor;
+    text-align: center;
+    // border-top: $border-color solid 1px;
+    padding: 20px 0 11px 0;
+    margin-bottom: 1em;
+    // p {
+    //     max-width: 100%;
+    // }
+
+    .icon-gap {
+        display: inline-block;
+        width: 10px;
+    }
+
+    .icon {
+        height: 18px;
+    }
+
+    &:hover {
+        // color: $main-text-color;
+
+        a {
+            // color: $main-text-color;
+            // text-decoration: underline;
+            color: $themeColor;
+        }
+    }
+
+    a {
+        color: $navLinkColor;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .footer-text {
+        text-align: center;
+    }
+}
+
+.bigger-first-letter:first-of-type > p::first-letter {
+    -webkit-initial-letter: 2;
+            initial-letter: 2;
+    color: $themeColor;
+    font-family: $button-font;
+    font-size: 2em;
+    margin-right: .1em;
+    margin-bottom: 0;
+}
